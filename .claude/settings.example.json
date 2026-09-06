@@ -1,0 +1,28 @@
+{
+  "_comment": [
+    "Example PreToolUse hook registration. Both hooks run synchronously and must complete",
+    "before a tool call proceeds. The governance-surface guard matches every tool ('*') and",
+    "is the default-deny layer. The tool-allowlist guard matches only one MCP namespace and",
+    "narrows further within it. The narrowest effective restriction governs — GOVERNANCE.md §37."
+  ],
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          { "type": "command", "command": "node",
+            "args": [".claude/hooks/protect-governance-surfaces.js"],
+            "async": false, "timeout": 10 }
+        ]
+      },
+      {
+        "matcher": "mcp__codebase-memory-mcp__.*",
+        "hooks": [
+          { "type": "command", "command": "node",
+            "args": [".claude/hooks/enforce-tool-allowlist.js"],
+            "async": false, "timeout": 10 }
+        ]
+      }
+    ]
+  }
+}

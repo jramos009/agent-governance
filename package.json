@@ -1,0 +1,13 @@
+{
+  "name": "agent-governance",
+  "version": "1.0.0",
+  "description": "Enforced guardrails for coding agents with real tool access: default-deny PreToolUse hooks, an approval-gate model, and behavioural tests proving the hooks match the policy.",
+  "license": "MIT",
+  "private": false,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node --check .claude/hooks/protect-governance-surfaces.js && node --check .claude/hooks/enforce-tool-allowlist.js && echo hooks parse OK"
+  },
+  "keywords": ["ai-governance", "agent-safety", "guardrails", "claude-code", "hooks", "least-privilege", "mcp"]
+}
